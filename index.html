@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Panadería Monroy - Catálogo Digital</title>
+  
+  <!-- Tipografía Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Estilos principales -->
+  <link rel="stylesheet" href="styles.css">
+  
+  <!-- Librería de Iconos Lucide -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  
+  <!-- Librería JavaScript para generar Código QR real -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+</head>
+<body>
+
+  <!-- Encabezado / Branding -->
+  <header class="navbar">
+    <div class="brand-container">
+      <div class="logo-wrapper">
+        <img src="imagenes/WhatsApp Image 2026-10-28 at 11.53.57 AM.jpeg" alt="Logo Panadería Monroy" class="brand-logo" onerror="this.src='https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=150&q=80'">
+      </div>
+      <div>
+        <h1 class="brand-title">Panadería Monroy</h1>
+        <p class="brand-tagline">El pan nuestro de cada día</p>
+      </div>
+    </div>
+    
+    <button class="cart-trigger" id="cartBtn" aria-label="Ver carrito">
+      <i data-lucide="shopping-bag"></i>
+      <span class="cart-text">Ver Pedido</span>
+      <span class="cart-count" id="cartCount">0</span>
+    </button>
+  </header>
+
+  <!-- Banner Principal Informativo -->
+  <section class="hero-banner">
+    <div class="hero-content">
+      <h2><i data-lucide="sparkles"></i> ¡Horneado Frecuente y Sabor Artesanal!</h2>
+      <p>Selecciona tus panes favoritos y envía tu pedido directo a nuestro WhatsApp. Puedes recibirlo en la ruta del carro repartidor o retirarlo en local.</p>
+    </div>
+  </section>
+
+  <!-- Barra de Filtros y Búsqueda -->
+  <section class="controls-container">
+    <div class="search-box">
+      <i data-lucide="search" class="search-icon"></i>
+      <input type="text" id="searchInput" placeholder="Buscar concha, semita, pan francés, salpor...">
+    </div>
+
+    <div class="filter-tabs">
+      <button class="tab-btn active" data-category="todos">Todos los Panes</button>
+      <button class="tab-btn" data-category="dulce">Pan Dulce Tradicional</button>
+      <button class="tab-btn" data-category="salado">Pan Salado y Francés</button>
+      <button class="tab-btn" data-category="especial">Especialidades</button>
+    </div>
+  </section>
+
+  <!-- Catálogo / Grilla de Productos -->
+  <main class="products-grid" id="productsGrid">
+    <!-- Carga dinámica mediante JavaScript -->
+  </main>
+
+  <!-- Panel Lateral del Carrito (Drawer Slide-over) -->
+  <div class="cart-overlay" id="cartOverlay"></div>
+  <aside class="cart-drawer" id="cartDrawer">
+    <div class="cart-header">
+      <h3><i data-lucide="shopping-cart"></i> Tu Resumen de Compra</h3>
+      <button class="close-btn" id="closeCartBtn">&times;</button>
+    </div>
+
+    <div class="cart-body" id="cartItemsContainer">
+      <!-- Elementos del carrito dinámicos -->
+    </div>
+
+    <div class="cart-footer">
+      <div class="cart-summary">
+        <span>Total Estimado:</span>
+        <strong id="cartTotal">$0.00</strong>
+      </div>
+
+      <div class="delivery-options">
+        <label for="deliveryMethod">Método de Entrega:</label>
+        <select id="deliveryMethod">
+          <option value="Carro Repartidor">Entrega en Ruta (Carro de Ventas)</option>
+          <option value="Retiro en Tienda">Retiro en Tienda / Local</option>
+        </select>
+      </div>
+
+      <div class="customer-info">
+        <input type="text" id="customerName" placeholder="Tu Nombre completo *" required>
+        <input type="text" id="customerAddress" placeholder="Dirección / Colonia / Referencia para entrega">
+      </div>
+
+      <button class="btn-whatsapp" id="sendWhatsappBtn">
+        <i data-lucide="message-circle"></i> Confirmar Pedido por WhatsApp
+      </button>
+    </div>
+  </aside>
+
+  <!-- Botón de Pruebas y Validación Técnica de Bachillerato -->
+  <div class="eval-section">
+    <button class="btn-eval" id="evalModalBtn">
+      <i data-lucide="qr-code"></i> Probar Código QR y Validación con Usuario
+    </button>
+  </div>
+
+  <!-- Modal del Simulador QR y Lista de Verificación -->
+  <div class="modal-overlay" id="evalModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>Simulador de Prueba de Usuario</h3>
+        <button class="close-btn" id="closeEvalBtn">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p>Escanea este código QR generado en tiempo real con la cámara de tu celular para abrir el catálogo:</p>
+        
+        <div class="qr-container">
+          <!-- Contenedor donde qrcode.js dibujará el código dinámico -->
+          <div id="qrcode"></div>
+        </div>
+
+        <div class="task-checklist">
+          <h4>Pruebas a realizar con el usuario:</h4>
+          <ul>
+            <li><i data-lucide="check-circle-2"></i> <strong>Tarea 1:</strong> Escanear el QR y explorar las categorías.</li>
+            <li><i data-lucide="check-circle-2"></i> <strong>Tarea 2:</strong> Agregar 3 tipos de pan al carrito.</li>
+            <li><i data-lucide="check-circle-2"></i> <strong>Tarea 3:</strong> Seleccionar entrega y generar el mensaje de WhatsApp.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Script principal -->
+  <script src="script.js"></script>
+  <script>
+    lucide.createIcons();
+  </script>
+</body>
+</html>
